@@ -7,9 +7,40 @@
 
 import SwiftUI
 
+struct ContentView : View {
+    var body: some View {
+        TabView{
+            PickerContentView()
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                    Text("Picker Tab")
+                }
+            
+            RedView()
+                .tabItem {
+                    Image(systemName: "circle.fill")
+                    Text("Color Tab")
+                }
+        }
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+
+struct RedView : View {
+    var body: some View {
+        Color.red
+    }
+}
+
 struct PickerContentView: View {
     
-    //@State -> Struct는 내부 프로퍼티를 변경할 수 없지만, @State 키워드를 붙이면 가능합. Swift 5.1부터 제공.
     let genderType = ["남자", "여자", "기타"]
     let residenceType = ["서울", "대전", "대구", "광주", "부산", "제주", "수원", "기타"]
     let jobType = ["간호사","개발자","의사","프리랜서","요리사","헤어디자이너","회사원"]
@@ -21,8 +52,9 @@ struct PickerContentView: View {
     @State var residence : Int = 0
     @State var job : Int = 0
     @State var result : String = ""
-
+    
     var body: some View {
+        
         NavigationView {
             Form{
                 Section (header: Text("이름")){
@@ -65,7 +97,7 @@ struct PickerContentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 
-               
+                
                 Section (header: Text("자기소개 결과")){
                     Text("\(result)")
                     Button("결과보기"){
@@ -79,16 +111,10 @@ struct PickerContentView: View {
                     }
                     
                 }
-              
+                
                 
             }.navigationTitle("회원가입")
         }
-    }
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PickerContentView()
+        
     }
 }
